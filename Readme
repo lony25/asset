@@ -16,3 +16,14 @@ mvn clean package
 2. curl localhost:8080/assetlist
 3. curl -XPUT localhost:8080/asset/{asset_id} -d'{"status":"ARCHIVED"}'
 4. curl -XPOST localhost:8080/asset -F "data=@path/to/local/file"
+
+#Assumption
+1. There are only two kind of assets - Active, Archived.
+2. An asset can only be Archived but can not be moved back to Active type.
+3. No Delete option for any asset.
+4. Hard limit supported by individual bucket.
+
+#Design
+1. Active assets are stored in bucket/Active/{asset_id}
+2. Archived assets are stored in bucket/Archive/{asset_id}. Once copy is complete, asset is deleted from Active directory
+3. All asset_id are generated timestamps at the time of upload.
