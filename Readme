@@ -1,0 +1,18 @@
+#Build
+
+mvn clean package
+
+#Pre requisite
+1. AWS S3 accesskey
+2. AWS S3 secretkey
+3. AWS S3 bucket (Should already be present. Region is hardcoded to US_EAST_2)
+
+#Startup Application
+  java -Daws.s3.access.key=<> -Daws.s3.secret.key=<> -Daws.s3.bucket=<> -jar target/asset-uploader-1.0.jar
+
+#Usage
+
+1. curl localhost:8080/asset/{asset_id}?{timeout=100}
+2. curl localhost:8080/assetlist
+3. curl -XPUT localhost:8080/asset/{asset_id} -d'{"status":"ARCHIVED"}'
+4. curl -XPOST localhost:8080/asset -F "data=@path/to/local/file"
